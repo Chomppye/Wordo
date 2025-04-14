@@ -1,0 +1,2 @@
+# Wordo
+Wordle remake project
