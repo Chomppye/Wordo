@@ -1,0 +1,47 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #252422;
+    margin: 5px 0 0 0; /*  Shorthand for your margin  */
+    justify-content: center; /* Center vertically in body */
+    align-items: center;     /* Center horizontally in body */
+}
+
+.top-bar {
+    display: flex;
+    border: none; 
+    border-bottom: 1px solid white;
+    padding-bottom: 15px;  /* Consistent padding */
+    width: 100%;
+    justify-content: center;
+
+}
+
+.board {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.rows {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
+    margin: 75px auto;
+    gap: 10px;
+}
+
+.box {
+    flex: 1 0 calc(16.666% - 10px);
+    aspect-ratio: 1 / 1;
+    border: 1px solid white;
+    box-sizing: border-box;
+
+    /*flex: 0 1 100px;
+    min-width: 100px;
+    max-width: 150px;
+    aspect-ratio: 1 / 1;
+    border: 1px solid white;*/
+}
