@@ -1,4 +1,4 @@
-import { fetchWord } from "./wordFetcher.js"
+import { fetchWord } from "./modules/wordFetcher.js"
 
 const menuBtn = document.querySelector("#menuBtn")
 const hintBtn = document.querySelector("#hintBtn")
