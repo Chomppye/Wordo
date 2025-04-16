@@ -111,5 +111,6 @@ export function fetchWord(wordLength = 4) {
    const list = wordList[wordLength]
    if (!list) return null;
    const randomIndex = Math.floor(Math.random() * list.length);
-   return list[randomIndex]
+   let word = list[randomIndex]
+   return word.split("")
 }
