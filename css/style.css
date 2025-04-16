@@ -2,24 +2,25 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #252422;
-    margin: 5px 0 0 0; /*  Shorthand for your margin  */
-    justify-content: center; /* Center vertically in body */
-    align-items: center;     /* Center horizontally in body */
+    margin: 5px 0 0 0;
+    justify-content: center;
+    align-items: center;
 }
 
 .top-bar {
     display: flex;
-    border: none; 
+    border: none;
     border-bottom: 1px solid white;
-    padding-bottom: 15px;  /* Consistent padding */
+    padding-bottom: 5px;
     width: 100%;
-    justify-content: center;
-
+    justify-content: space-around;
+    margin-top: 2px;
 }
 
 .board {
     width: 100%;
     max-width: 600px;
+    max-height: 750px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -29,19 +30,27 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: center;
-    margin: 75px auto;
-    gap: 10px;
+    margin: 15px auto;
 }
 
 .box {
-    flex: 1 0 calc(16.666% - 10px);
     aspect-ratio: 1 / 1;
+    max-width: 122px;
     border: 1px solid white;
     box-sizing: border-box;
-
-    /*flex: 0 1 100px;
-    min-width: 100px;
-    max-width: 150px;
-    aspect-ratio: 1 / 1;
-    border: 1px solid white;*/
 }
+
+.rows-4 {flex: 1 0 25%;}
+.scale-4{transform: scale(0.85);}
+
+.rows-5 {flex: 1 0 20%;}
+.scale-5{transform: scale(0.8);}
+
+.rows-6 {flex: 1 0 16.666%;}
+.scale-6{transform: scale(0.9);}
+
+.rows-7 {flex: 1 0 14.285%;}
+.scale-7{transform: scale(0.9);}
+
+.rows-8 {flex: 1 0 12.5%;}
+.scale-8{transform: scale(0.9);}
