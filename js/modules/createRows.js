@@ -8,6 +8,7 @@ export function createRows(perRow = 4) {
             newDiv.classList.add(`rows-${perRow}`)
             newDiv.classList.add(`scale-${perRow}`)
             newDiv.classList.add(`${i}-row`)
+            newDiv.classList.add(`${j + 1}-square`)
             rowDiv.appendChild(newDiv)
         }
     }
