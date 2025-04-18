@@ -4,9 +4,11 @@ import { createRows, clearRows } from "./modules/createRows.js";
 const menuBtn = document.querySelector("#menuBtn");
 const hintBtn = document.querySelector("#hintBtn");
 const restartBtn = document.querySelector("#restartBtn");
+const closeBtn = document.querySelector(".close-btn")
 
 const wordoBoard = document.querySelector("#rows-container");
 const wordoRows = wordoBoard.querySelector(".row");
+const popUpContainer = document.querySelector(".modal-content")
 
 let currentWord = [];
 let typedWord = []
@@ -23,6 +25,23 @@ function restart() {
     currentRow = 1;
     currentBox = 1;
     typedWord = [];
+}
+
+function winScreen() {
+    let text = popUpContainer.querySelector(".centered-text");
+    let dynamicText = currentRow === 1 ? "try!": "tries!"
+    text.innerText = `Congratulations, you got it right in ${currentRow} ${dynamicText}`
+    document.querySelector(".modal").style.display = "flex"
+}
+
+function loseScreen() {
+    let text = popUpContainer.querySelector(".centered-text");
+    text.innerText = `Good try, the correct word was ${currentWord.join("")}`
+    document.querySelector(".modal").style.display = "flex"
+}
+
+function closePopUp() {
+    document.querySelector(".modal").style.display = "none"
 }
 
 function start() {
@@ -118,7 +137,7 @@ function keyTracking(event) {
         let won = checkForWin(result)
 
         if (won) {
-            console.log("stop playing")
+            winScreen()
             restart()
             return;
         }
@@ -126,6 +145,9 @@ function keyTracking(event) {
         currentRow++
         if ((currentRow - 1) == 6) {
             console.log("pop up loss message")
+            loseScreen()
+            restart()
+            return
         }
         currentBox = 1
         typedWord = []
@@ -137,5 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
     start()
     restartBtn.addEventListener("click", restart);
     document.addEventListener("keydown", keyTracking)
+    closeBtn.addEventListener("click", closePopUp)
     console.log(currentWord)
 })
