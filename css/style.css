@@ -16,6 +16,18 @@ body {
     align-items: center;
 }
 
+.correct {
+    background-color: #A6FFA1;
+}
+
+.present {
+    background-color: #7D6F86;
+}
+
+.absent {
+    background-color: #B5D2CB;
+}
+
 .top-bar {
     display: flex;
     border: none;

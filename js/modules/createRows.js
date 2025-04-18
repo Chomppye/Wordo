@@ -7,8 +7,7 @@ export function createRows(perRow = 4) {
             newDiv.classList.add("box")
             newDiv.classList.add(`rows-${perRow}`)
             newDiv.classList.add(`scale-${perRow}`)
-            newDiv.classList.add(`${i}-row`)
-            newDiv.classList.add(`${j + 1}-square`)
+            newDiv.id =`${i}-${j + 1}`
             rowDiv.appendChild(newDiv)
         }
     }
