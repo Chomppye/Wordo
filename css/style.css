@@ -98,6 +98,32 @@ body {
     margin: 15px auto;
 }
 
+.bot-bar{
+    display: flex;
+    flex-direction: column;
+}
+
+#restartBtn {
+    margin-top: 5px;
+}
+
+.restart-query {
+    background-color: #FF7F11;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    align-items: stretch;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 8px;
+}
+
+.restart-btns {
+    display: flex;
+    justify-content: center;
+}
+
 .box {
     aspect-ratio: 1 / 1;
     max-width: 122px;

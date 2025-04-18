@@ -5,10 +5,13 @@ const menuBtn = document.querySelector("#menuBtn");
 const hintBtn = document.querySelector("#hintBtn");
 const restartBtn = document.querySelector("#restartBtn");
 const closeBtn = document.querySelector(".close-btn")
+const yesBtn = document.querySelector("#yesBtn")
+const noBtn = document.querySelector("#noBtn")
 
 const wordoBoard = document.querySelector("#rows-container");
 const wordoRows = wordoBoard.querySelector(".row");
 const popUpContainer = document.querySelector(".modal-content")
+const restartPopUpContainer = document.querySelector(".restart-query")
 
 let currentWord = [];
 let typedWord = []
@@ -17,7 +20,7 @@ let selectedSquareAmount = 5;
 let currentRow = 1;
 let currentBox = 1;
 
-function restart() {
+function forceRestart() {
     clearRows();
     currentWord = fetchWord(selectedSquareAmount);
     console.log(currentWord)
@@ -25,6 +28,29 @@ function restart() {
     currentRow = 1;
     currentBox = 1;
     typedWord = [];
+}
+
+function yesRestart() {
+    clearRows();
+    currentWord = fetchWord(selectedSquareAmount);
+    console.log(currentWord)
+    createRows(selectedSquareAmount);
+    currentRow = 1;
+    currentBox = 1;
+    typedWord = [];
+
+    restartPopUpContainer.style.display = "none"
+    restartBtn.style.display = "block"
+}
+
+function noRestart() {
+    restartPopUpContainer.style.display = "none"
+    restartBtn.style.display = "block"
+}
+
+function queryRestart() {
+    restartPopUpContainer.style.display = "flex"
+    restartBtn.style.display = "none"
 }
 
 function winScreen() {
@@ -138,7 +164,7 @@ function keyTracking(event) {
 
         if (won) {
             winScreen()
-            restart()
+            forceRestart()
             return;
         }
 
@@ -146,7 +172,7 @@ function keyTracking(event) {
         if ((currentRow - 1) == 6) {
             console.log("pop up loss message")
             loseScreen()
-            restart()
+            forceRestart()
             return
         }
         currentBox = 1
@@ -157,8 +183,10 @@ function keyTracking(event) {
 
 document.addEventListener("DOMContentLoaded", () => {
     start()
-    restartBtn.addEventListener("click", restart);
+    restartBtn.addEventListener("click", queryRestart);
     document.addEventListener("keydown", keyTracking)
     closeBtn.addEventListener("click", closePopUp)
+    yesBtn.addEventListener("click", yesRestart)
+    noBtn.addEventListener("click", noRestart)
     console.log(currentWord)
 })
