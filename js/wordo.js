@@ -16,9 +16,13 @@ let currentRow = 1;
 let currentBox = 1;
 
 function restart() {
-    clearRows()
-    currentWord = fetchWord(selectedSquareAmount)
-    createRows(selectedSquareAmount)
+    clearRows();
+    currentWord = fetchWord(selectedSquareAmount);
+    console.log(currentWord)
+    createRows(selectedSquareAmount);
+    currentRow = 1;
+    currentBox = 1;
+    typedWord = [];
 }
 
 function start() {
@@ -26,32 +30,38 @@ function start() {
     createRows(selectedSquareAmount)
 }
 
-function revealResults(results =[], row) {
+function revealResults(results = [], row) {
     results.forEach((value, index) => {
-        let updatedNumber = index + 1
-        let currentSquare = document.getElementById(`${row}-${updatedNumber}`)
+        let updatedNumber = index + 1;
+        let currentSquare = document.getElementById(`${row}-${updatedNumber}`);
         
-        switch(value) {
-            case "correct":
-                console.log("make green #A6FFA1")
-                currentSquare.classList.add(`${value}`)
-            break;
-
-            case "present":
-                console.log("make mountbatten pink #7D6F86")
-                currentSquare.classList.add(`${value}`)
-            break;
-
-            case "absent":
-                console.log("make gray #B5D2CB")
-                currentSquare.classList.add(`${value}`)
-            break;
-
-            default:
-                console.log("return")
-            break;
+        if (!currentSquare) {
+            console.error(`Element not found: ${row}-${updatedNumber}`);
+            return;
         }
-    })
+
+        try {
+            switch(value) {
+                case "correct":
+                    currentSquare.classList.add(value);
+                    break;
+                case "present":
+                    currentSquare.classList.add(value);
+                    break;
+                case "absent":
+                    currentSquare.classList.add(value);
+                    break;
+                default:
+                    break;
+            }
+        } catch (e) {
+            console.error("Error adding class:", e, "to element:", currentSquare);
+        }
+    });
+}
+
+function checkForWin(result = []) {
+    return result.every(value => value === "correct");
 }
 
 function checkGuess(current, typed) {
@@ -85,22 +95,34 @@ function keyTracking(event) {
 
     if (/^[a-z]$/.test(keyPressed) && currentBox <= currentWord.length) {
         const activeBox = document.getElementById(`${currentRow}-${currentBox}`);
-        activeBox.innerText = keyPressed.toUpperCase()
-        activeBox.classList.add("text")
-        typedWord.push(keyPressed)
-        currentBox++
+        if (activeBox) {
+            activeBox.innerText = keyPressed.toUpperCase()
+            activeBox.classList.add("text")
+            typedWord.push(keyPressed)
+            currentBox++
+        }
     }
 
     if (keyPressed === "Backspace" && currentBox > 1) {
         currentBox--
         const activeBox = document.getElementById(`${currentRow}-${currentBox}`);
-        activeBox.innerText = ""
+        if (activeBox) {
+            activeBox.innerText = ""
+            typedWord.pop()
+        }
     } 
 
     if (keyPressed === "Enter" && (currentBox - 1) === currentWord.length) {
         let result = checkGuess(currentWord, typedWord)
         revealResults(result, currentRow)
-        console.log(result)
+        let won = checkForWin(result)
+
+        if (won) {
+            console.log("stop playing")
+            restart()
+            return;
+        }
+
         currentRow++
         if ((currentRow - 1) == 6) {
             console.log("pop up loss message")
@@ -111,9 +133,9 @@ function keyTracking(event) {
 
 }
 
-restartBtn.addEventListener("click", restart)
-
-start()
-console.log(currentWord)
-
-document.addEventListener("keydown", keyTracking)
+document.addEventListener("DOMContentLoaded", () => {
+    start()
+    restartBtn.addEventListener("click", restart);
+    document.addEventListener("keydown", keyTracking)
+    console.log(currentWord)
+})
