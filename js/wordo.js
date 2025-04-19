@@ -83,7 +83,6 @@ function hintPopUp() {
 function forceRestart() {
     clearRows();
     currentWord = fetchWord(selectedSquareAmount);
-    console.log(currentWord)
     createRows(selectedSquareAmount);
     currentRow = 1;
     currentBox = 1;
@@ -94,7 +93,6 @@ function forceRestart() {
 function yesRestart() {
     clearRows();
     currentWord = fetchWord(selectedSquareAmount);
-    console.log(currentWord)
     createRows(selectedSquareAmount);
     currentRow = 1;
     currentBox = 1;
@@ -248,7 +246,6 @@ function keyTracking(event) {
 
         currentRow++
         if ((currentRow - 1) == 6) {
-            console.log("pop up loss message")
             loseScreen()
             forceRestart()
             return
@@ -270,5 +267,4 @@ document.addEventListener("DOMContentLoaded", () => {
     closeBtn.addEventListener("click", closePopUp);
     yesBtn.addEventListener("click", yesRestart);
     noBtn.addEventListener("click", noRestart);
-    console.log(currentWord);
 })
