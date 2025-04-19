@@ -28,6 +28,11 @@ body {
     background-color: #B5D2CB;
 }
 
+.hint {
+    background-color: #4056F4;
+    /* add a background color and make sure you make the text appear for the hint*/
+}
+
 .top-bar {
     display: flex;
     border: none;

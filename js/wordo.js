@@ -20,6 +20,48 @@ let selectedSquareAmount = 5;
 let currentRow = 1;
 let currentBox = 1;
 
+function hintPopUp() {
+    if (typedWord.length > 0) { // if the user typed more than 1 letter
+
+        //see how many letters the user has typed into the current row
+        let currentGuess = typedWord.length
+        //if the user typed less than the max amount
+        if (currentGuess < currentWord.length) {
+            let currentWordClone = [...currentWord]
+            // only give one hint from those indexes
+             // do the currentGuess minus the currentWord length
+            let availableIndexs = currentGuess - currentWord.length
+            // using that number get the last values starting from the back
+            let availableHints = currentWordClone.splice(availableIndexs)
+            console.log(availableHints)
+            // example word fluffy | current guess = flu | 
+            // flu - fluffy = 3
+            // first get y then f then another f
+            // then choose a random letter from the three to give the hint
+            let random = Math.floor(Math.random() * availableHints.length)
+            let hint = availableHints[random]
+            console.log(hint)
+            // so if 2 is chosen the f before the ys div index is turned green
+            for (let i = availableHints.length - 1; i > 0; i--) {
+                if (currentWord[i] === hint) {
+                    const box = document.getElementById(`${currentRow}-${i + 1}`);
+
+                    if (box && !box.classList.contains("correct")) {
+                        box.innerText = hint.toUpperCase();
+                        box.classList.add("text")
+                        box.classList.add("hint")
+                        break;
+                    }
+                }
+            }
+            hintBtn.style.display = "none"
+        }
+        // else
+        //gather all of the typed letters and pick a random one to give a hint for
+
+    }
+}
+
 function forceRestart() {
     clearRows();
     currentWord = fetchWord(selectedSquareAmount);
@@ -49,8 +91,10 @@ function noRestart() {
 }
 
 function queryRestart() {
-    restartPopUpContainer.style.display = "flex"
-    restartBtn.style.display = "none"
+    if (currentRow !== 1) {
+        restartPopUpContainer.style.display = "flex"
+        restartBtn.style.display = "none"
+    }
 }
 
 function winScreen() {
@@ -184,9 +228,10 @@ function keyTracking(event) {
 document.addEventListener("DOMContentLoaded", () => {
     start()
     restartBtn.addEventListener("click", queryRestart);
-    document.addEventListener("keydown", keyTracking)
-    closeBtn.addEventListener("click", closePopUp)
-    yesBtn.addEventListener("click", yesRestart)
-    noBtn.addEventListener("click", noRestart)
-    console.log(currentWord)
+    hintBtn.addEventListener("click", hintPopUp);
+    document.addEventListener("keydown", keyTracking);
+    closeBtn.addEventListener("click", closePopUp);
+    yesBtn.addEventListener("click", yesRestart);
+    noBtn.addEventListener("click", noRestart);
+    console.log(currentWord);
 })
