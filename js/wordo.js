@@ -7,11 +7,15 @@ const restartBtn = document.querySelector("#restartBtn");
 const closeBtn = document.querySelector(".close-btn")
 const yesBtn = document.querySelector("#yesBtn")
 const noBtn = document.querySelector("#noBtn")
+const menuInfoBtn = document.querySelector("#menu-infobtn")
+const mainInfoCloseBtn = document.querySelector(".menu-info-closebtn")
 
 const wordoBoard = document.querySelector("#rows-container");
 const wordoRows = wordoBoard.querySelector(".row");
 const popUpContainer = document.querySelector(".modal-content")
 const restartPopUpContainer = document.querySelector(".restart-query")
+const menuContainer = document.querySelector(".menu-modal")
+const infoContainer = document.querySelector(".menu-info")
 
 let currentWord = [];
 let typedWord = []
@@ -19,6 +23,36 @@ let selectedSquareAmount = 5;
 
 let currentRow = 1;
 let currentBox = 1;
+
+let opened = false
+let infoDisplay = false
+
+function menuPopUp() {
+    if (!opened) {
+        menuContainer.style.display = "flex"
+        menuBtn.innerText = "close"
+        opened = true
+    } else {
+        opened = false
+        infoDisplay = false
+        menuContainer.style.display = "none"
+        infoContainer.style.display = "none"
+        menuBtn.innerText = "Menu"
+        menuInfoBtn.innerText = "Info"
+    }
+}
+
+function infoPopUp() {
+    if (!infoDisplay) {
+        infoContainer.style.display = "flex"
+        menuInfoBtn.innerText = "close"
+        infoDisplay = true
+    } else {
+        infoContainer.style.display = "none"
+        menuInfoBtn.innerText = "Info"
+        infoDisplay = false
+    }
+}
 
 function hintPopUp() {
     if (typedWord.length !== currentWord.length) {
@@ -31,9 +65,7 @@ function hintPopUp() {
             const hintLetter = unguessedLetters[randomIndex];
             
             for (let i = 0; i < currentWord.length; i++) {
-                if (currentWord[i] === hintLetter && 
-                    (!typedWord[i] || typedWord[i] !== hintLetter)) {
-                    
+                if (currentWord[i] === hintLetter && (!typedWord[i] || typedWord[i] !== hintLetter)) {
                     const box = document.getElementById(`${currentRow}-${i + 1}`);
                     if (box && !box.classList.contains("correct")) {
                         box.innerText = hintLetter.toUpperCase();
@@ -215,6 +247,8 @@ function keyTracking(event) {
 document.addEventListener("DOMContentLoaded", () => {
     start()
     restartBtn.addEventListener("click", queryRestart);
+    menuBtn.addEventListener("click", menuPopUp);
+    menuInfoBtn.addEventListener("click", infoPopUp)
     hintBtn.addEventListener("click", hintPopUp);
     document.addEventListener("keydown", keyTracking);
     closeBtn.addEventListener("click", closePopUp);
