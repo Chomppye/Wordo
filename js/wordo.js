@@ -55,6 +55,7 @@ function forceRestart() {
     currentRow = 1;
     currentBox = 1;
     typedWord = [];
+    hintBtn.style.display = "block"
 }
 
 function yesRestart() {
@@ -68,6 +69,7 @@ function yesRestart() {
 
     restartPopUpContainer.style.display = "none"
     restartBtn.style.display = "block"
+    hintBtn.style.display = "block"
 }
 
 function noRestart() {
