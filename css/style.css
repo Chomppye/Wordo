@@ -30,7 +30,6 @@ body {
 
 .hint {
     background-color: #4056F4;
-    /* add a background color and make sure you make the text appear for the hint*/
 }
 
 .top-bar {
@@ -85,6 +84,85 @@ body {
     text-align: center;
     margin: 0;
     padding: 0 20px;
+}
+
+.menu-modal {
+    display: none;
+    margin-top: 10px;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF7F11;
+    border-radius: 8px;
+    gap: 5px;
+    padding-top: 5px;
+}
+
+.menu-word-buttons {
+    display: flex;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px ;
+}
+
+.menu-info {
+    position: fixed;
+    background-color: #000F08;
+    border: 2px solid #FF7F11;
+    justify-content: center;
+    align-content: center;
+    z-index: 999;
+    width: 800px;
+
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.color-info {
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+    gap: 15px;
+}
+
+.correct-color {
+    color: #A6FFA1;
+}
+
+.present-color {
+    color: #7D6F86;
+}
+
+.absent-color {
+    color: #B5D2CB;
+}
+
+.hint-color {
+    color: #4056F4;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 100%; 
+    text-align: center; 
+    gap: 5px; 
+    padding-bottom: 20px;
+}
+
+h2.info-header {
+    color: aliceblue;
+}
+
+.info-text {
+    color: aliceblue;
 }
 
 .board {
