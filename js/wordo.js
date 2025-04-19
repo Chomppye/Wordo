@@ -16,6 +16,7 @@ const popUpContainer = document.querySelector(".modal-content")
 const restartPopUpContainer = document.querySelector(".restart-query")
 const menuContainer = document.querySelector(".menu-modal")
 const infoContainer = document.querySelector(".menu-info")
+const menuWordBtns = document.querySelector(".menu-word-buttons")
 
 let currentWord = [];
 let typedWord = []
@@ -198,6 +199,20 @@ function checkGuess(current, typed) {
     return result;
 }
 
+function addLetterPickFunction(event) {
+    const btn = event.target;
+    const idNumber = parseInt(btn.id);
+    selectedSquareAmount = idNumber;
+    forceRestart()
+}
+
+function setUpLetterPickAmountBtns() {
+    const buttons = menuWordBtns.querySelectorAll(".rowbtn")
+    buttons.forEach((value) => {
+        value.addEventListener("click", addLetterPickFunction)
+    })
+}
+
 function keyTracking(event) {
     let keyPressed = event.key;
 
@@ -248,6 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
     start()
     restartBtn.addEventListener("click", queryRestart);
     menuBtn.addEventListener("click", menuPopUp);
+    setUpLetterPickAmountBtns()
     menuInfoBtn.addEventListener("click", infoPopUp)
     hintBtn.addEventListener("click", hintPopUp);
     document.addEventListener("keydown", keyTracking);
